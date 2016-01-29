@@ -14,14 +14,20 @@ function processData(data) {
         $entry.append($(`<h1>${stop.StopName}</h1>`))
 
         const $table = $(`<table></table>`)
-        $table.append('<tr><th>Minutes</th><th>Route</th><th>Direction</th></tr>')
+        $table.append('<tr><th class="minutes">Minutes</th><th class="route">Route</th><th class="text">Direction</th></tr>')
 
-        stop.Predictions.forEach(function(prediction) {
+        var count = 0
+        stop.Predictions.some(function(prediction) {
             const $prediction = $(`<tr class="prediction"></tr>`)
-            $prediction.append($(`<td class="">${prediction.Minutes}</td>`))
-            $prediction.append($(`<td class="">${prediction.RouteID}</td>`))
-            $prediction.append($(`<td class="">${prediction.DirectionText}</td>`))
+            $prediction.append($(`<td class="minutes">${prediction.Minutes}</td>`))
+            $prediction.append($(`<td class="route">${prediction.RouteID}</td>`))
+            $prediction.append($(`<td class="text">${prediction.DirectionText}</td>`))
             $table.append($prediction)
+            count = count + 1
+
+            if (count > 5) {
+                return true
+            }
         })
 
         $entry.append($table)
