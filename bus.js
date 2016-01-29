@@ -9,14 +9,14 @@ function processData(data) {
 
     $predictions.empty()
 
-    busses.forEach((stop) => {
+    busses.forEach(function(stop) {
         const $entry = $('<div class="stop"></stop>')
         $entry.append($(`<h1>${stop.StopName}</h1>`))
 
         const $table = $(`<table></table>`)
         $table.append('<tr><th>Minutes</th><th>Route</th><th>Direction</th></tr>')
 
-        stop.Predictions.forEach((prediction) => {
+        stop.Predictions.forEach(function(prediction) {
             const $prediction = $(`<tr class="prediction"></tr>`)
             $prediction.append($(`<td class="">${prediction.Minutes}</td>`))
             $prediction.append($(`<td class="">${prediction.RouteID}</td>`))
@@ -31,6 +31,6 @@ function processData(data) {
 
 getData().then(processData)
 
-window.setInterval(() => {
+window.setInterval(function() {
     getData().then(processData)
 }, 5000)
