@@ -16,18 +16,15 @@ function processData(data) {
         const $table = $(`<table></table>`)
         $table.append('<tr><th class="minutes">Minutes</th><th class="route">Route</th><th class="text">Direction</th></tr>')
 
-        var count = 0
         stop.Predictions.some(function(prediction) {
             const $prediction = $(`<tr class="prediction"></tr>`)
+            if (prediction.RouteID === 'G8') {
+                $prediction.addClass('bold')
+            }
             $prediction.append($(`<td class="minutes">${prediction.Minutes}</td>`))
             $prediction.append($(`<td class="route">${prediction.RouteID}</td>`))
             $prediction.append($(`<td class="text">${prediction.DirectionText}</td>`))
             $table.append($prediction)
-            count = count + 1
-
-            if (count > 5) {
-                return true
-            }
         })
 
         $entry.append($table)
